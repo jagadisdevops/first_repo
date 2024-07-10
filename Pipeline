@@ -1,0 +1,22 @@
+# Jenkins Declarative Pipeline in YAML format
+
+pipeline:
+  agent:
+    label: 'your-agent-label'  # Replace with your Jenkins agent label or 'any' for any available agent
+
+  stages:
+    - stage: Checkout
+      steps:
+        - checkout: scm  # Checkout code from the default SCM (e.g., Git)
+
+    - stage: Build
+      steps:
+        - sh 'make clean build'  # Example shell command to clean and build your project
+
+    - stage: Test
+      steps:
+        - sh 'make test'  # Example shell command to run tests
+
+  post:
+    always:
+      - archiveArtifacts: '**/target/*.jar'  # Archive artifacts for later use or deployment
